@@ -3,15 +3,25 @@
 	<stdio.h>
 	<stdlib.h>
 
-1510542034 source:c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\anasint.c
+1510607333 source:c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\anasint.c
 	<stdio.h>
 	<stdlib.h>
 	"anasint.h"
+	"analex.h"
 
-1510542268 c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\anasint.h
+1510602410 c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\anasint.h
 
-1510540855 source:c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\main.c
+1510595512 source:c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\main.c
 	<stdio.h>
 	<stdlib.h>
+	"analex.h"
 	"anasint.h"
+
+1510592887 c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\analex.h
+
+1510604514 source:c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\analex.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"analex.h"
 
