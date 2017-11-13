@@ -3,3 +3,15 @@
 	<stdio.h>
 	<stdlib.h>
 
+1510542034 source:c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\anasint.c
+	<stdio.h>
+	<stdlib.h>
+	"anasint.h"
+
+1510542268 c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\anasint.h
+
+1510540855 source:c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\main.c
+	<stdio.h>
+	<stdlib.h>
+	"anasint.h"
+
