@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+#CodeBlocks Layout
+*.layout
+#Data files
+*.txt
+*.cmm
+*.dat
