@@ -9,8 +9,9 @@
 top_symbols_table = 0;
 
 char erros[][50] = {
-                "",
-                "ID Expected"
+                "Unspecified error.",
+                "ID Expected.",
+                "; Expected."
                 };
 
 void prog(){
@@ -25,7 +26,7 @@ void prog(){
                 while(strcmp(tk.type, "SN") && strcmp(tk.content, ";")){
                     call_analyzer();
                     if(!strcmp(tk.type, "EOF")){
-                        erro(0);
+                        erro(2);
                     }
                     //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                     if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
@@ -41,6 +42,8 @@ void prog(){
                         //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                         puts("PONTO E VIRGULA");
                         break;
+                    } else {
+                        erro(2);
                     }
                 }
             } else {
@@ -69,7 +72,7 @@ void prog(){
                                 puts("PONTO E VIRGULA");
                             } else {
                                 //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
-                                erro(0);
+                                erro(2);
                             }
                         }
                     } else {
@@ -157,7 +160,6 @@ void tipos_p_opc(){
         //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
         puts("TIPO");
         while(strcmp(tk.type, "SN") && strcmp(tk.content, ")")){
-
             call_analyzer();
             if(!strcmp(tk.type, "ID")){
                 //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
@@ -222,7 +224,7 @@ void op_rel(){
 }
 
 int erro(int e){
-    printf("ERRO! %s", erros[e]);
+    printf("ERRO! %s in line %d", erros[e], line);
     exit(e);
 }
 
