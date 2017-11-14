@@ -87,7 +87,7 @@ void op_rel();
 /*
 *
 */
-int erro();
+int erro(int);
 
 /*
 *

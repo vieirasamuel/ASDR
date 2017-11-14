@@ -8,6 +8,11 @@
 
 top_symbols_table = 0;
 
+char erros[][50] = {
+                "",
+                "ID Expected"
+                };
+
 void prog(){
     while(strcmp(tk.type, "EOF")){
         call_analyzer();
@@ -20,7 +25,7 @@ void prog(){
                 while(strcmp(tk.type, "SN") && strcmp(tk.content, ";")){
                     call_analyzer();
                     if(!strcmp(tk.type, "EOF")){
-                        erro();
+                        erro(0);
                     }
                     printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                     if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
@@ -30,7 +35,7 @@ void prog(){
                             printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                             puts("IDENTIFICADOR");
                         } else {
-                            erro();
+                            erro(0);
                         }
                     } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ";")){
                         printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
@@ -39,7 +44,7 @@ void prog(){
                     }
                 }
             } else {
-                erro();
+                erro(1);
             }
         } else if(!strcmp(tk.type, "PR") && !strcmp(tk.content, "prototipo")){
                 printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
@@ -64,18 +69,18 @@ void prog(){
                                 puts("PONTO E VIRGULA");
                             } else {
                                 printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
-                                erro();
+                                erro(0);
                             }
                         }
                     } else {
-                        erro();
+                        erro(0);
                     }
                 } else {
-                    erro();
+                    erro(0);
                 }
         } else if(!strcmp(tk.type, "EOF")){
         } else{
-            erro();
+            erro(0);
         }
     }
 }
@@ -100,6 +105,7 @@ void tipos_p_opc(){
     if(!strcmp(tk.type, "PR") && !strcmp(tk.content, "semparam")){
         printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
         puts("SEMPARAM");
+        call_analyzer();
     } else if(tipo()){
         printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
         puts("TIPO");
@@ -109,6 +115,7 @@ void tipos_p_opc(){
             if(!strcmp(tk.type, "ID")){
                 printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                 puts("IDENTIFICADOR");
+                call_analyzer();
             }
             if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
                 printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
@@ -123,7 +130,7 @@ void tipos_p_opc(){
                         call_analyzer();
                     }
                 } else {
-                    erro();
+                    erro(0);
                 }
             } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
                 printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
@@ -135,7 +142,7 @@ void tipos_p_opc(){
         }
     } else {
         printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
-        erro();
+        erro(0);
     }
 }
 
@@ -167,9 +174,9 @@ void op_rel(){
 
 }
 
-int erro(){
-    puts("erro!");
-    exit(1);
+int erro(int e){
+    printf("ERRO! %s", erros[e]);
+    exit(e);
 }
 
 void call_analyzer(){
