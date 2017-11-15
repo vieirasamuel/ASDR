@@ -10,7 +10,7 @@ top_symbols_table = 0;
 
 char erros[][50] = {
                 "Unspecified error.",
-                "ID Expected.",
+                "Identifier Expected.",
                 "; Expected."
                 };
 
