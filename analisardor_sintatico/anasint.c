@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "anasint.h"
 #include "analex.h"
+#define unspecifiedError 0
+#define idExpected 1
+#define pontoVirgulaExpected 2
 
 #define TRUE 1
 #define FALSE 0
@@ -20,59 +23,49 @@ void prog(){
         if(tipo()){
             puts("TIPO");
             call_analyzer();
-            //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
             if(!strcmp(tk.type, "ID")){
                 puts("IDENTIFICADOR");
                 while(strcmp(tk.type, "SN") && strcmp(tk.content, ";")){
                     call_analyzer();
                     if(!strcmp(tk.type, "EOF")){
-                        erro(2);
+                        erro(pontoVirgulaExpected);
                     }
-                    //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                     if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
                         puts("SINAL VIRGULA");
                         call_analyzer();
                         if(!strcmp(tk.type, "ID")){
-                            //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                             puts("IDENTIFICADOR");
                         } else {
-                            erro(0);
+                            erro(unspecifiedError);
                         }
                     } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ";")){
-                        //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                         puts("PONTO E VIRGULA");
                         break;
                     } else {
-                        erro(2);
+                        erro(pontoVirgulaExpected);
                     }
                 }
             } else {
                 erro(1);
             }
         } else if(!strcmp(tk.type, "PR") && !strcmp(tk.content, "prototipo")){
-                //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                 puts("PROTOTIPO");
                 call_analyzer();
                 if(tipo() || !strcmp(tk.type, "PR") && !strcmp(tk.content, "semretorno")){
-                    //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                     puts("TIPO OU SEMRETORNO");
                     call_analyzer();
                     if(!strcmp(tk.type, "ID")){
-                        //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                         puts("IDENTIFICADOR");
                         call_analyzer();
                         if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "(")){
-                            //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                             puts("ABRE PARENTESE");
                             call_analyzer();
                             tipos_p_opc();
                             call_analyzer();
                             if(!strcmp(tk.type, "SN") && !strcmp(tk.content,";")){
-                                //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                                 puts("PONTO E VIRGULA");
                             } else {
-                                //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
-                                erro(2);
+                                erro(pontoVirgulaExpected);
                             }
                         }
                     } else {
@@ -147,7 +140,7 @@ void tipos_param(){
         }
     } else {
         //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
-        erro(0);
+        erro(unspecifiedError);
     }
 }
 
@@ -179,7 +172,7 @@ void tipos_p_opc(){
                         call_analyzer();
                     }
                 } else {
-                    erro(0);
+                    erro(unspecifiedError);
                 }
             } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
                 //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
@@ -191,7 +184,7 @@ void tipos_p_opc(){
         }
     } else {
         //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
-        erro(0);
+        erro(unspecifiedError);
     }
 }
 
@@ -220,7 +213,8 @@ void fator(){
 }
 
 void op_rel(){
-
+    call_analyzer();
+    if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
 }
 
 int erro(int e){
