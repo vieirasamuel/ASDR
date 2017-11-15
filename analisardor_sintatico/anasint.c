@@ -215,6 +215,7 @@ void fator(){
 void op_rel(){
     call_analyzer();
     if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
+    }
 }
 
 int erro(int e){
