@@ -25,17 +25,17 @@
 	<string.h>
 	"analex.h"
 
-1510669262 source:c:\users\brunelli\documents\github\asdr\analisardor_sintatico\main.c
+1510785902 source:c:\users\brunelli\documents\github\asdr\analisardor_sintatico\main.c
 	<stdio.h>
 	<stdlib.h>
 	"analex.h"
 	"anasint.h"
 
-1510669262 c:\users\brunelli\documents\github\asdr\analisardor_sintatico\analex.h
+1510785902 c:\users\brunelli\documents\github\asdr\analisardor_sintatico\analex.h
 
-1510670775 c:\users\brunelli\documents\github\asdr\analisardor_sintatico\anasint.h
+1510787571 c:\users\brunelli\documents\github\asdr\analisardor_sintatico\anasint.h
 
-1510669565 source:c:\users\brunelli\documents\github\asdr\analisardor_sintatico\analex.c
+1510787571 source:c:\users\brunelli\documents\github\asdr\analisardor_sintatico\analex.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
