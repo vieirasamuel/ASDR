@@ -68,6 +68,31 @@ void prog(){
                             if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
                                 puts("FECHA PARENTESE");
                                 call_analyzer();
+                                while(strcmp(tk.content, ";")){
+                                    if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
+                                        puts("VIRGULA");
+                                        call_analyzer();
+                                        if(!strcmp(tk.type, "ID")){
+                                            puts("IDENTIFICADOR");
+                                            call_analyzer();
+                                            if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "(")){
+                                                puts("ABRE PARENTESE");
+                                                call_analyzer();
+                                                tipos_p_opc();
+                                                if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
+                                                    puts("FECHA PARENTESE");
+                                                    call_analyzer();
+                                                } else {
+                                                    erro(0);
+                                                }
+                                            } else {
+                                                erro(0);
+                                            }
+                                        } else {
+                                            erro(0);
+                                        }
+                                    }
+                                }
                                 if(!strcmp(tk.type, "SN") && !strcmp(tk.content,";")){
                                     puts("PONTO E VIRGULA");
                                 } else {
