@@ -3,3 +3,47 @@
 	<stdio.h>
 	<stdlib.h>
 
+1510799534 source:c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\anasint.c
+	<stdio.h>
+	<stdlib.h>
+	"anasint.h"
+	"analex.h"
+
+1510789686 c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\anasint.h
+
+1510595512 source:c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\main.c
+	<stdio.h>
+	<stdlib.h>
+	"analex.h"
+	"anasint.h"
+
+1510592887 c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\analex.h
+
+1510789686 source:c:\users\samuel vieira\documents\gitkraken\analisador_sintatico\asdr\analisardor_sintatico\analex.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"analex.h"
+
+1510669262 source:c:\users\brunelli\documents\github\asdr\analisardor_sintatico\main.c
+	<stdio.h>
+	<stdlib.h>
+	"analex.h"
+	"anasint.h"
+
+1510669262 c:\users\brunelli\documents\github\asdr\analisardor_sintatico\analex.h
+
+1510670775 c:\users\brunelli\documents\github\asdr\analisardor_sintatico\anasint.h
+
+1510669565 source:c:\users\brunelli\documents\github\asdr\analisardor_sintatico\analex.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"analex.h"
+
+1510673587 source:c:\users\brunelli\documents\github\asdr\analisardor_sintatico\anasint.c
+	<stdio.h>
+	<stdlib.h>
+	"anasint.h"
+	"analex.h"
+
