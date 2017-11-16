@@ -5,6 +5,8 @@
 #define unspecifiedError 0
 #define idExpected 1
 #define pontoVirgulaExpected 2
+#define opRel 3
+#define fechaParenteseExpected 4
 
 #define TRUE 1
 #define FALSE 0
@@ -14,7 +16,9 @@ top_symbols_table = 0;
 char erros[][50] = {
                 "Unspecified error.",
                 "Identifier Expected.",
-                "; Expected."
+                "; Expected.",
+                "OpRel Expected",
+                ") Expected"
                 };
 
 void prog(){
@@ -46,7 +50,7 @@ void prog(){
                     }
                 }
             } else {
-                erro(1);
+                erro(idExpected);
             }
         } else if(!strcmp(tk.type, "PR") && !strcmp(tk.content, "prototipo")){
                 puts("PROTOTIPO");
@@ -83,7 +87,7 @@ void prog(){
                 }
         } else if(!strcmp(tk.type, "EOF")){
         } else{
-            erro(0);
+            erro(unspecifiedError);
         }
     }
 }
@@ -189,12 +193,59 @@ void termo(){
 }
 
 void fator(){
-
+    call_analyzer();
+    if(!strcmp(tk.type, "ID")){
+        puts("IDENTIFICADOR");
+        if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "(")){
+            puts("ABRE PARENTESE");
+            call_analyzer();
+            expr();
+            while(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
+                puts("VIRGULA");
+                call_analyzer();
+                expr();
+            }
+            if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
+                puts("FECHA PARENTESE");
+            } else{
+                erro(fechaParenteseExpected);
+            }
+        }
+    } else if(!strcmp(tk.type, "CTI")){
+        puts("CONSTANTE INTEIRA");
+    } else if(!strcmp(tk.type, "CTR")){
+        puts("CONSTANTE REAL");
+    } else if(!strcmp(tk.type, "CTC")){
+        puts("CONSTANTE CARACTERE");
+    } else if(!strcmp(tk.type, "CTL")){
+        puts("CONSTANTE LITERAL");
+    } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "!")){
+        puts("EXCLAMACAO");
+        fator();
+    } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "(")){
+        puts("ABRE PARENTESE");
+        call_analyzer();
+        expr();
+        if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
+            puts("FECHA PARENTESE");
+        } else{
+            erro(fechaParenteseExpected);
+        }
+    } else{
+        erro(0);
+    }
 }
 
 void op_rel(){
     call_analyzer();
-    if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
+    if((!strcmp(tk.type, "SN") && !strcmp(tk.content, "==")) ||
+       (!strcmp(tk.type, "SN") && !strcmp(tk.content, "!=")) ||
+       (!strcmp(tk.type, "SN") && !strcmp(tk.content, "<=")) ||
+       (!strcmp(tk.type, "SN") && !strcmp(tk.content, "<")) ||
+       (!strcmp(tk.type, "SN") && !strcmp(tk.content, ">=")) ||
+       (!strcmp(tk.type, "SN") && !strcmp(tk.content, ">"))){
+    } else{
+        erro(opRel);
     }
 }
 
