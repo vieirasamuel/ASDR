@@ -61,12 +61,20 @@ void prog(){
                             puts("ABRE PARENTESE");
                             call_analyzer();
                             tipos_p_opc();
-                            call_analyzer();
-                            if(!strcmp(tk.type, "SN") && !strcmp(tk.content,";")){
-                                puts("PONTO E VIRGULA");
+                            if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
+                                puts("FECHA PARENTESE");
+                                call_analyzer();
+                                if(!strcmp(tk.type, "SN") && !strcmp(tk.content,";")){
+                                    puts("PONTO E VIRGULA");
+                                    call_analyzer();
+                                } else {
+                                    erro(pontoVirgulaExpected);
+                                }
                             } else {
-                                erro(pontoVirgulaExpected);
+                                erro(0);
                             }
+                        } else {
+                            erro(0);
                         }
                     } else {
                         erro(0);
@@ -95,95 +103,68 @@ int tipo(){
 
 void tipos_param(){
     if(!strcmp(tk.type, "PR") && !strcmp(tk.content, "semparam")){
-        //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
         puts("SEMPARAM");
         call_analyzer();
     } else if(tipo()){
-        //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
         puts("TIPO");
-        while(strcmp(tk.type, "SN") && strcmp(tk.content, ")")){
-
+        call_analyzer();
+        if(!strcmp(tk.type, "ID")){
+            puts("IDENTIFICADOR");
             call_analyzer();
-            if(!strcmp(tk.type, "ID")){
-                //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
-                puts("IDENTIFICADOR");
-                call_analyzer();
-            }
-            else {
-                erro(0);
-            }
+        } else {
+            erro(0);
+        }
+        while(strcmp(tk.content, ")")){
             if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
-                //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                 puts("SINAL VIRGULA");
                 call_analyzer();
                 if(tipo()){
                     puts("TIPO");
                     call_analyzer();
                     if(!strcmp(tk.type, "ID")){
-                        //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                         puts("IDENTIFICADOR");
                         call_analyzer();
-                    }
-                    else{
+                    } else {
                         erro(0);
                     }
                 } else {
                     erro(0);
                 }
-            } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
-                //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
-                puts("FECHA PARETESE");
-                break;
-            } else {
-
             }
         }
     } else {
-        //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
         erro(unspecifiedError);
     }
 }
 
 void tipos_p_opc(){
     if(!strcmp(tk.type, "PR") && !strcmp(tk.content, "semparam")){
-        //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
         puts("SEMPARAM");
         call_analyzer();
     } else if(tipo()){
-        //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
         puts("TIPO");
-        while(strcmp(tk.type, "SN") && strcmp(tk.content, ")")){
+        call_analyzer();
+        if(!strcmp(tk.type, "ID")){
+            puts("IDENTIFICADOR");
             call_analyzer();
-            if(!strcmp(tk.type, "ID")){
-                //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
-                puts("IDENTIFICADOR");
-                call_analyzer();
-            }
+        }
+        while(strcmp(tk.content, ")")){
             if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
-                //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                 puts("SINAL VIRGULA");
                 call_analyzer();
                 if(tipo()){
                     puts("TIPO");
                     call_analyzer();
                     if(!strcmp(tk.type, "ID")){
-                        //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
                         puts("IDENTIFICADOR");
                         call_analyzer();
                     }
                 } else {
-                    erro(unspecifiedError);
+                    erro(0);
                 }
-            } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
-                //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
-                puts("FECHA PARETESE");
-                break;
-            } else {
-
             }
         }
     } else {
-        //printf("tk.type: %s tk.content: %s\n",tk.type, tk.content);
         erro(unspecifiedError);
     }
 }
@@ -219,7 +200,7 @@ void op_rel(){
 }
 
 int erro(int e){
-    printf("ERRO! %s in line %d", erros[e], line);
+    printf("ERRO! %s", erros[e]);
     exit(e);
 }
 
