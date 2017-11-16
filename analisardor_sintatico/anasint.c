@@ -66,7 +66,6 @@ void prog(){
                                 call_analyzer();
                                 if(!strcmp(tk.type, "SN") && !strcmp(tk.content,";")){
                                     puts("PONTO E VIRGULA");
-                                    call_analyzer();
                                 } else {
                                     erro(pontoVirgulaExpected);
                                 }
