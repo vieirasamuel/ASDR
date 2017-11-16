@@ -422,9 +422,12 @@ void expr(){
 void expr_simp(){
     if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "+") || !strcmp(tk.content, "-")){
         puts("SINAL MAIS OU SINAL MENOS");
-        call_analyzer();
+        //call_analyzer();      "termo" já chama o próprio analyzer
     }
     termo();
+    while((!strcmp(tk.type, "SN") && !strcmp(tk.content, "+")) || (!strcmp(tk.type, "SN") && !strcmp(tk.content, "-")) || (!strcmp(tk.type, "SN") && !strcmp(tk.content, "||"))){
+        termo();
+    }
 
 }
 
@@ -432,6 +435,7 @@ void termo(){
     fator();
     call_analyzer();
     while((!strcmp(tk.type, "SN") && !strcmp(tk.content, "*")) || (!strcmp(tk.type, "SN") && !strcmp(tk.content, "/")) || (!strcmp(tk.type, "SN") && !strcmp(tk.content, "&&"))){
+        puts("SINAL MULTIPLICACAO OU SINAL DIVISAO OU SINAL AND");
         fator();
         call_analyzer();
     }
