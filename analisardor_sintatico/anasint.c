@@ -268,18 +268,163 @@ void tipos_p_opc(){
 }
 
 void cmd(){
-
+    if(!strcmp(tk.type, "PR") && !strcmp(tk.content, "se")){
+        puts("SE");
+        call_analyzer();
+        if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "(")){
+            puts("ABRE PARENTESE");
+            call_analyzer();
+            expr();
+            if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
+                puts("FECHA PARENTESE");
+                call_analyzer();
+                cmd();
+                if(!strcmp(tk.type, "PR") && !strcmp(tk.content, "senao")){
+                    puts("SENAO");
+                    call_analyzer();
+                    cmd();
+                }
+            } else {
+                erro(fechaParenteseExpected);
+            }
+        } else {
+            erro(0);
+        }
+    } else if(!strcmp(tk.type, "PR") && !strcmp(tk.content, "enquanto")){
+        puts("ENQUANTO");
+        call_analyzer();
+        if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "(")){
+            puts("ABRE PARENTESE");
+            call_analyzer();
+            expr();
+            if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
+                puts("FECHA PARENTESE");
+                call_analyzer();
+                cmd();
+            } else {
+                erro(fechaParenteseExpected);
+            }
+        } else {
+            erro(0);
+        }
+    } else if(!strcmp(tk.type, "PR") && !strcmp(tk.content, "para")){
+        puts("PARA");
+        call_analyzer();
+        if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "(")){
+            puts("ABRE PARENTESE");
+            call_analyzer();
+            atrib();
+            if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ";")){
+                puts("PONTO E VIRGULA");
+                call_analyzer();
+                expr();
+                if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ";")){
+                    puts("PONTO E VIRGULA");
+                    call_analyzer();
+                    atrib();
+                    if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
+                        puts("FECHA PARENTESE");
+                        call_analyzer();
+                        cmd();
+                    } else {
+                        erro(fechaParenteseExpected);
+                    }
+                } else {
+                    erro(pontoVirgulaExpected);
+                }
+            } else {
+                erro(pontoVirgulaExpected);
+            }
+        }
+    } else if (!strcmp(tk.type, "PR") && !strcmp(tk.content, "retorne")){
+        puts("RETORNE");
+        call_analyzer();
+        expr();
+        if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ";")){
+            puts("PONTO E VIRGULA");
+            call_analyzer();
+        } else {
+            erro(pontoVirgulaExpected);
+        }
+    } else if(!strcmp(tk.type, "ID")){
+        puts("IDENTIFICADOR");
+        call_analyzer();
+        if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "(")){
+            puts("ABRE PARENTESE");
+            call_analyzer();
+            expr();
+            while(strcmp(tk.content, ")")){
+                if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
+                    puts("SINAL VIRGULA");
+                    call_analyzer();
+                    expr();
+                } else {
+                    erro(0);
+                }
+            }
+            if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
+                puts("FECHA PARENTESE");
+                call_analyzer();
+                if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ";")){
+                    puts("PONTO E VIRGULA");
+                    call_analyzer();
+                } else {
+                    erro(pontoVirgulaExpected);
+                }
+            } else {
+                erro(fechaParenteseExpected);
+            }
+        }
+    } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "{")){
+        puts("ABRE CHAVE");
+        call_analyzer();
+        cmd();
+        if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "}")){
+            puts("FECHA CHAVE");
+            call_analyzer();
+        } else {
+            erro(0);
+        }
+    } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ";")){
+        puts("PONTO E VIRGULA");
+        call_analyzer();
+    } else {
+        atrib();
+        if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ";")){
+            puts("PONTO E VIRGULA");
+            call_analyzer();
+        } else {
+            erro(pontoVirgulaExpected);
+        }
+    }
 }
 
 void atrib(){
-
+    if(!strcmp(tk.type, "ID")){
+        puts("IDENTIFICADOR");
+        call_analyzer();
+        if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "=")){
+            puts("SINAL IGUAL");
+            expr();
+        } else {
+            erro(0);
+        }
+    }
 }
 
 void expr(){
-
+    expr_simp();
+    //FUNÇÕES ABAIXO SÃO OPCIONAIS!
+    /*op_rel();
+    expr_simp();*/
 }
 
 void expr_simp(){
+    if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "+") || !strcmp(tk.content, "-")){
+        puts("SINAL MAIS OU SINAL MENOS");
+        call_analyzer();
+    }
+    termo();
 
 }
 
