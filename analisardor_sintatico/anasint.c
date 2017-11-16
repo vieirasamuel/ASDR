@@ -284,7 +284,12 @@ void expr_simp(){
 }
 
 void termo(){
-
+    fator();
+    call_analyzer();
+    while((!strcmp(tk.type, "SN") && !strcmp(tk.content, "*")) || (!strcmp(tk.type, "SN") && !strcmp(tk.content, "/")) || (!strcmp(tk.type, "SN") && !strcmp(tk.content, "&&"))){
+        fator();
+        call_analyzer();
+    }
 }
 
 void fator(){

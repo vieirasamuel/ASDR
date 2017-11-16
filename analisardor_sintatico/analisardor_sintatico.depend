@@ -47,3 +47,19 @@
 	"anasint.h"
 	"analex.h"
 
+1510700640 source:c:\users\abrunelli\documents\github\asdr\analisardor_sintatico\analex.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"analex.h"
+
+1510610396 c:\users\abrunelli\documents\github\asdr\analisardor_sintatico\analex.h
+
+1510610396 source:c:\users\abrunelli\documents\github\asdr\analisardor_sintatico\main.c
+	<stdio.h>
+	<stdlib.h>
+	"analex.h"
+	"anasint.h"
+
+1510700640 c:\users\abrunelli\documents\github\asdr\analisardor_sintatico\anasint.h
+
