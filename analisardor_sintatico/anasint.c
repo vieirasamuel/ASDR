@@ -7,6 +7,7 @@
 #define pontoVirgulaExpected 2
 #define opRel 3
 #define fechaParenteseExpected 4
+#define TYPE_EXPECTED 5
 
 #define TRUE 1
 #define FALSE 0
@@ -18,7 +19,8 @@ char erros[][50] = {
                 "Identifier Expected.",
                 "; Expected.",
                 "OpRel Expected",
-                ") Expected"
+                ") Expected",
+                "Type Expected"
                 };
 
 void prog(){
@@ -69,6 +71,9 @@ void prog(){
                                 puts("FECHA PARENTESE");
                                 call_analyzer();
                                 while(strcmp(tk.content, ";")){
+                                    if(!strcmp(tk.type, "EOF")){
+                                        erro(pontoVirgulaExpected);
+                                    }
                                     if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
                                         puts("VIRGULA");
                                         call_analyzer();
@@ -83,29 +88,28 @@ void prog(){
                                                     puts("FECHA PARENTESE");
                                                     call_analyzer();
                                                 } else {
-                                                    erro(0);
+                                                    erro(fechaParenteseExpected);
                                                 }
                                             } else {
                                                 erro(0);
                                             }
                                         } else {
-                                            erro(0);
+                                            erro(idExpected);
                                         }
+                                    } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content,";")){
+                                        puts("PONTO E VIRGULA");
+                                    } else {
+                                        erro(pontoVirgulaExpected);
                                     }
                                 }
-                                if(!strcmp(tk.type, "SN") && !strcmp(tk.content,";")){
-                                    puts("PONTO E VIRGULA");
-                                } else {
-                                    erro(pontoVirgulaExpected);
-                                }
                             } else {
-                                erro(0);
+                                erro(fechaParenteseExpected);
                             }
                         } else {
                             erro(0);
                         }
                     } else {
-                        erro(0);
+                        erro(idExpected);
                     }
                 } else {
                     erro(0);
@@ -143,6 +147,9 @@ void tipos_param(){
             erro(0);
         }
         while(strcmp(tk.content, ")")){
+            if(!strcmp(tk.type, "EOF")){
+                erro(fechaParenteseExpected);
+            }
             if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
                 puts("SINAL VIRGULA");
                 call_analyzer();
@@ -177,6 +184,8 @@ void tipos_p_opc(){
             call_analyzer();
         }
         while(strcmp(tk.content, ")")){
+            printf("tk.type: [%s] tk.content [%s]\n", tk.type, tk.content);
+            system("pause");
             if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ",")){
                 puts("SINAL VIRGULA");
                 call_analyzer();
@@ -188,12 +197,14 @@ void tipos_p_opc(){
                         call_analyzer();
                     }
                 } else {
-                    erro(0);
+                    erro(TYPE_EXPECTED);
                 }
+            } else if(!strcmp(tk.type, "EOF") || strcmp(tk.content, ")")){
+                erro(fechaParenteseExpected);
             }
         }
     } else {
-        erro(unspecifiedError);
+        erro(TYPE_EXPECTED);
     }
 }
 
