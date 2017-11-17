@@ -140,7 +140,7 @@ void prog(){
                             if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ")")){
                                 puts("FECHA PARENTESE");
                                 call_analyzer();
-                                while(strcmp(tk.content, ";")){
+                                while(tk.content != ";"){
                                     if(!strcmp(tk.type, "EOF")){
                                         erro(pontoVirgulaExpected);
                                     }
@@ -168,6 +168,8 @@ void prog(){
                                         }
                                     } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content,";")){
                                         puts("PONTO E VIRGULA");
+                                        call_analyzer();
+                                        break;
                                     } else {
                                         erro(pontoVirgulaExpected);
                                     }
