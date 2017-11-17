@@ -387,9 +387,9 @@ void cmd(){
         if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "}")){
             puts("FECHA CHAVE");
             call_analyzer();
-        } else {
+        } /*else {
             erro(0);
-        }
+        }*/
     } else if(!strcmp(tk.type, "SN") && !strcmp(tk.content, ";")){
         puts("PONTO E VIRGULA");
         call_analyzer();
@@ -439,6 +439,7 @@ void expr_simp(){
     termo();
     while((!strcmp(tk.type, "SN") && !strcmp(tk.content, "+")) || (!strcmp(tk.type, "SN") && !strcmp(tk.content, "-")) || (!strcmp(tk.type, "SN") && !strcmp(tk.content, "||"))){
         puts("OPERADOR MAIS OU MENOS OU ||");
+        call_analyzer();
         termo();
     }
 
