@@ -414,12 +414,20 @@ void atrib(){
 
 void expr(){
     expr_simp();
-    //FUNÇÕES ABAIXO SÃO OPCIONAIS!
-    /*op_rel();
-    expr_simp();*/
+    call_analyzer();
+    if((!strcmp(tk.type, "SN") && !strcmp(tk.content, "==")) ||
+       (!strcmp(tk.type, "SN") && !strcmp(tk.content, "!=")) ||
+       (!strcmp(tk.type, "SN") && !strcmp(tk.content, "<=")) ||
+       (!strcmp(tk.type, "SN") && !strcmp(tk.content, "<")) ||
+       (!strcmp(tk.type, "SN") && !strcmp(tk.content, ">=")) ||
+       (!strcmp(tk.type, "SN") && !strcmp(tk.content, ">"))){
+           op_rel();
+           expr_simp();
+    }
 }
 
 void expr_simp(){
+    call_analyzer();
     if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "+") || !strcmp(tk.content, "-")){
         puts("SINAL MAIS OU SINAL MENOS");
         //call_analyzer();      "termo" já chama o próprio analyzer
@@ -486,13 +494,13 @@ void fator(){
 }
 
 void op_rel(){
-    call_analyzer();
     if((!strcmp(tk.type, "SN") && !strcmp(tk.content, "==")) ||
        (!strcmp(tk.type, "SN") && !strcmp(tk.content, "!=")) ||
        (!strcmp(tk.type, "SN") && !strcmp(tk.content, "<=")) ||
        (!strcmp(tk.type, "SN") && !strcmp(tk.content, "<")) ||
        (!strcmp(tk.type, "SN") && !strcmp(tk.content, ">=")) ||
        (!strcmp(tk.type, "SN") && !strcmp(tk.content, ">"))){
+           puts("OPERADOR DE RELACAO");
     } else{
         erro(opRel);
     }
