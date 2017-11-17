@@ -314,7 +314,7 @@ Token lexical_analyzer() {
                     }
                     break;
                 case 23:
-                    if(isprint(atom) || atom == '\n'){
+                    if(isprint(atom) || atom == '\n' || atom == '\t'){
                         state = 24;
                         str_atom[0] = atom;
                         strcat(tk.content, str_atom);
