@@ -48,7 +48,7 @@ void prog(){
                         if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "{")){
                             puts("ABRE CHAVE");
                             call_analyzer();
-                            if(tipo()){
+                            while(tipo()){
                                 puts("TIPO");
                                 call_analyzer();
                                 if(!strcmp(tk.type, "ID")){
@@ -78,7 +78,8 @@ void prog(){
                                 } else {
                                     erro(idExpected);
                                 }
-                            } else {
+                            }
+                            while(strcmp(tk.content, "}")) {
                                 cmd();
                             }
                             if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "}")){
@@ -87,6 +88,8 @@ void prog(){
                             } else {
                                 erro(0);
                             }
+                        } else {
+                            erro(0);
                         }
                     } else {
                         erro(fechaParenteseExpected);
@@ -450,7 +453,7 @@ void termo(){
 }
 
 void fator(){
-    call_analyzer();
+    //call_analyzer();
     if(!strcmp(tk.type, "ID")){
         puts("IDENTIFICADOR");
         if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "(")){
