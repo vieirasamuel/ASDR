@@ -417,7 +417,6 @@ void atrib(){
 
 void expr(){
     expr_simp();
-    call_analyzer();
     if((!strcmp(tk.type, "SN") && !strcmp(tk.content, "==")) ||
        (!strcmp(tk.type, "SN") && !strcmp(tk.content, "!=")) ||
        (!strcmp(tk.type, "SN") && !strcmp(tk.content, "<=")) ||
@@ -430,13 +429,14 @@ void expr(){
 }
 
 void expr_simp(){
-    call_analyzer();
+    //call_analyzer();
     if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "+") || !strcmp(tk.content, "-")){
         puts("SINAL MAIS OU SINAL MENOS");
-        //call_analyzer();      "termo" já chama o próprio analyzer
+        call_analyzer();
     }
     termo();
     while((!strcmp(tk.type, "SN") && !strcmp(tk.content, "+")) || (!strcmp(tk.type, "SN") && !strcmp(tk.content, "-")) || (!strcmp(tk.type, "SN") && !strcmp(tk.content, "||"))){
+        puts("OPERADOR MAIS OU MENOS OU ||");
         termo();
     }
 
