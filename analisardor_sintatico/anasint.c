@@ -410,6 +410,7 @@ void atrib(){
         call_analyzer();
         if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "=")){
             puts("SINAL IGUAL");
+            call_analyzer();
             expr();
         } else {
             erro(0);
@@ -456,9 +457,10 @@ void termo(){
 }
 
 void fator(){
-    //call_analyzer();
     if(!strcmp(tk.type, "ID")){
         puts("IDENTIFICADOR");
+        call_analyzer();
+        //printf("tk.type [%s]\ttk.content[%s]", tk.type, tk.content);
         if(!strcmp(tk.type, "SN") && !strcmp(tk.content, "(")){
             puts("ABRE PARENTESE");
             call_analyzer();
@@ -507,6 +509,7 @@ void op_rel(){
        (!strcmp(tk.type, "SN") && !strcmp(tk.content, ">=")) ||
        (!strcmp(tk.type, "SN") && !strcmp(tk.content, ">"))){
            puts("OPERADOR DE RELACAO");
+           call_analyzer();
     } else{
         erro(opRel);
     }
